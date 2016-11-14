@@ -2,7 +2,10 @@
 
 ##### Table of Contents  
 [Headers](#headers)  
-[Emphasis](#emphasis)  
+[Emphasis](#emphasis)
+[Java](#Java)
+[Javascript](#Javascript)
+## Headers
 ...snip...    
 <a name="headers"/>
 ## Headers
@@ -25,6 +28,7 @@
     </div>
 </pre>
 
+## Javascript
 ```javascript
 if (isAwesome){
   return true
@@ -32,6 +36,7 @@ if (isAwesome){
 ```
 
 
+## Java
 ```java
 /*
  * To change this license header, choose License Headers in Project Properties.
