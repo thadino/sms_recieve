@@ -230,9 +230,40 @@ public class Sms extends AppCompatActivity  {
 
 
 ## Sms Class (Kotlin)
-
-
-
+```kotlin
+class Sms:AppCompatActivity() {
+  protected fun onCreate(savedInstanceState:Bundle) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_sms)
+    // IncomingSms incSms = new IncomingSms(this);
+    val textview = findViewById(R.id.textView) as TextView
+    val button = findViewById(R.id.button) as Button
+    button.setOnClickListener(object:View.OnClickListener() {
+      fun onClick(v:View) {
+        Log.d("yolo", "" + R.id.textView)
+        textview.setText(Yolo)
+      }
+    })
+  }
+  fun textSetter(msg:String) {
+    Log.d("jeg er fundet !!! ", "" + R.id.textView)
+    val textview = findViewById(R.id.textView) as TextView
+    textview.setText(msg)
+  }
+  companion object {
+    private val text1:TextView
+    internal var Yolo:String
+    internal fun settext(Text:String) {
+      // Log.d("abekat", Text);
+      // Log.d("yolo", "" + R.id.textView);
+      // final TextView textview = (TextView) findViewById(R.id.textView);
+      // textview.setText("yolo");
+      Yolo = Text
+      Log.d("yolo", "" + Yolo)
+    }
+  }
+}
+```
 
 
 
