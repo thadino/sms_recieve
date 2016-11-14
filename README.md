@@ -7,12 +7,8 @@
 ## Headers
 ...snip...    
 <a name="headers"/>
-## Java
-...snip... 
-<a name="Java"/>
-## Javascript
-...snip... 
-<a name=Javascript/>
+
+
 
 ## Headers
 
@@ -35,14 +31,17 @@
 </pre>
 
 ## Javascript
+...snip... 
+<a name=Javascript/>
 ```javascript
 if (isAwesome){
   return true
 }
 ```
 
-
 ## Java
+...snip... 
+<a name="Java"/>
 ```java
 /*
  * To change this license header, choose License Headers in Project Properties.
