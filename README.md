@@ -2,15 +2,16 @@
 
 ##### Table of Contents  
 [Headers](#headers)  
-[Emphasis](#emphasis)
 [Java](#Java)
 [Javascript](#Javascript)
 ## Headers
 ...snip...    
 <a name="headers"/>
 ## Java
+...snip... 
 <a name="Java"/>
 ## Javascript
+...snip... 
 <a name=Javascript/>
 
 ## Headers
