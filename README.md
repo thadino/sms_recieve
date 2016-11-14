@@ -27,6 +27,7 @@
 </pre>
 
 ## Javascript
+
 <a name="Javascript"/>
 ```javascript
 if (isAwesome){
@@ -35,7 +36,7 @@ if (isAwesome){
 ```
 
 ## Java
-...snip... 
+
 <a name="Java"/>
 ```java
 /*
