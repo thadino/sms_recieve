@@ -7,6 +7,8 @@
 [Javascript](#Javascript)
 ## Headers
 ...snip...    
+<a name="Java"/>
+<a name=Javascript/>
 <a name="headers"/>
 ## Headers
 
