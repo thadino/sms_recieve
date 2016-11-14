@@ -1,3 +1,37 @@
+# activity_sms (XML)
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_sms"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="tutorialspoint.example.com.smsproject.Sms">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="34dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="49dp"
+        android:id="@+id/button" />
+</RelativeLayout>
+```
 
 # Incoming Sms Class
 ```kotlin
@@ -88,52 +122,6 @@ public class IncomingSms extends BroadcastReceiver {
     }
 
 }
-
-//public class IncomingSms extends BroadcastReceiver {
-//
-//    final SmsManager sms = SmsManager.getDefault();
-//
-//    public void onReceive(Context context, Intent intent)
-//    {
-//
-//        // Retrieves a map of extended data from the intent.
-//        final Bundle bundle = intent.getExtras();
-//
-//        try {
-//
-//            if (bundle != null) {
-//
-//                final Object[] pdusObj = (Object[]) bundle.get("pdus");
-//
-//                for (int i = 0; i < pdusObj.length; i++) {
-//
-//                    SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
-//                    String phoneNumber = currentMessage.getDisplayOriginatingAddress();
-//
-//                    String senderNum = phoneNumber;
-//                    String message = currentMessage.getDisplayMessageBody();
-//
-//                    Log.i("SmsReceiver", "senderNum: "+ senderNum + "; message: " + message);
-//
-//
-//                    // Show alert
-//                    int duration = Toast.LENGTH_LONG;
-//                    Toast toast = Toast.makeText(context, "senderNum: "+ senderNum + ", message: " + message, duration);
-//                    toast.show();
-//
-//                } // end for loop
-//            } // bundle is null
-//
-//        } catch (Exception e) {
-//            Log.e("SmsReceiver", "Exception smsReceiver" +e);
-//
-//        }
-//
-//
-//
-//    }
-//
-//}
 ```
 
 
@@ -156,7 +144,7 @@ import org.w3c.dom.Text;
 
 
 
-public class Sms extends AppCompatActivity implements Llamaface {
+public class Sms extends AppCompatActivity  {
 
     private static TextView text1;
     static String Yolo;
