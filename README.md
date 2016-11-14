@@ -22,7 +22,7 @@ Denne feature er meget brugbar og bliver brugt af indtil flere af de mest popul√
 
 ## Example of recieving an sms in an android application
 
-### activity_sms (XML)
+### manifest (XML)
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -270,9 +270,190 @@ class Sms:AppCompatActivity() {
 ## Example of sending an sms in an android application
 
 
+## Manifest XML
+```xml
+ <uses-permission android:name="android.permission.SEND_SMS">
+    </uses-permission>
+```
+
+## Main Activity (Java)
+```Java
+public class MainActivity extends Activity {
+
+        Button btnSendSMS;
+        EditText txtPhoneNo;
+        EditText txtMessage;
+
+        /** Called when the activity is first created. */
+        @Override
+        public void onCreate(Bundle savedInstanceState)
+        {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+
+
+
+            btnSendSMS = (Button) findViewById(R.id.btnSendSMS);
+            txtPhoneNo = (EditText) findViewById(R.id.txtPhoneNo);
+            txtMessage = (EditText) findViewById(R.id.txtMessage);
+
+            btnSendSMS.setOnClickListener(new View.OnClickListener()
+            {
+                public void onClick(View v)
+                {
+                    String phoneNo = txtPhoneNo.getText().toString();
+                    String message = txtMessage.getText().toString();
+                    if (phoneNo.length()>0 && message.length()>0)
+                        sendSMS(phoneNo, message);
+                    else
+                        Toast.makeText(getBaseContext(),
+                                "Please enter both phone number and message.",
+                                Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+    //---sends an SMS message to another device---
+    private void sendSMS(String phoneNumber, String message)
+    {String SENT = "SMS_SENT";
+        String DELIVERED = "SMS_DELIVERED";
+
+        PendingIntent sentPI = PendingIntent.getBroadcast(this, 0,
+                new Intent(SENT), 0);
+
+        PendingIntent deliveredPI = PendingIntent.getBroadcast(this, 0,
+                new Intent(DELIVERED), 0);
+
+
+
+        //---when the SMS has been sent---
+        registerReceiver(new BroadcastReceiver(){
+            @Override
+            public void onReceive(Context arg0, Intent arg1) {
+                switch (getResultCode())
+                {
+                    case Activity.RESULT_OK:
+                        Toast.makeText(getBaseContext(), "SMS sent",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
+                        Toast.makeText(getBaseContext(), "Generic failure",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case SmsManager.RESULT_ERROR_NO_SERVICE:
+                        Toast.makeText(getBaseContext(), "No service",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case SmsManager.RESULT_ERROR_NULL_PDU:
+                        Toast.makeText(getBaseContext(), "Null PDU",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case SmsManager.RESULT_ERROR_RADIO_OFF:
+                        Toast.makeText(getBaseContext(), "Radio off",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        }, new IntentFilter(SENT));
+
+        //---when the SMS has been delivered---
+        registerReceiver(new BroadcastReceiver(){
+            @Override
+            public void onReceive(Context arg0, Intent arg1) {
+                switch (getResultCode())
+                {
+                    case Activity.RESULT_OK:
+                        Toast.makeText(getBaseContext(), "SMS delivered",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case Activity.RESULT_CANCELED:
+                        Toast.makeText(getBaseContext(), "SMS not delivered",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        }, new IntentFilter(DELIVERED));
+
+
+        SmsManager sms = SmsManager.getDefault();
+        sms.sendTextMessage(phoneNumber, null, message, sentPI, deliveredPI);
+    }
+
+}
+```
+
+## Main Activity (Kotlin)
+```kotlin
+class MainActivity:Activity() {
+  internal var btnSendSMS:Button
+  internal var txtPhoneNo:EditText
+  internal var txtMessage:EditText
+  /** Called when the activity is first created. */
+  fun onCreate(savedInstanceState:Bundle) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
+    btnSendSMS = findViewById(R.id.btnSendSMS) as Button
+    txtPhoneNo = findViewById(R.id.txtPhoneNo) as EditText
+    txtMessage = findViewById(R.id.txtMessage) as EditText
+    btnSendSMS.setOnClickListener(object:View.OnClickListener() {
+      fun onClick(v:View) {
+        val phoneNo = txtPhoneNo.getText().toString()
+        val message = txtMessage.getText().toString()
+        if (phoneNo.length > 0 && message.length > 0)
+        sendSMS(phoneNo, message)
+        else
+        Toast.makeText(getBaseContext(),
+                       "Please enter both phone number and message.",
+                       Toast.LENGTH_SHORT).show()
+      }
+    })
+  }
+  //---sends an SMS message to another device---
+  private fun sendSMS(phoneNumber:String, message:String) {
+    val SENT = "SMS_SENT"
+    val DELIVERED = "SMS_DELIVERED"
+    val sentPI = PendingIntent.getBroadcast(this, 0,
+                                            Intent(SENT), 0)
+    val deliveredPI = PendingIntent.getBroadcast(this, 0,
+                                                 Intent(DELIVERED), 0)
+    //---when the SMS has been sent---
+    registerReceiver(object:BroadcastReceiver() {
+      fun onReceive(arg0:Context, arg1:Intent) {
+        when (getResultCode()) {
+          Activity.RESULT_OK -> Toast.makeText(getBaseContext(), "SMS sent",
+                                               Toast.LENGTH_SHORT).show()
+          SmsManager.RESULT_ERROR_GENERIC_FAILURE -> Toast.makeText(getBaseContext(), "Generic failure",
+                                                                    Toast.LENGTH_SHORT).show()
+          SmsManager.RESULT_ERROR_NO_SERVICE -> Toast.makeText(getBaseContext(), "No service",
+                                                               Toast.LENGTH_SHORT).show()
+          SmsManager.RESULT_ERROR_NULL_PDU -> Toast.makeText(getBaseContext(), "Null PDU",
+                                                             Toast.LENGTH_SHORT).show()
+          SmsManager.RESULT_ERROR_RADIO_OFF -> Toast.makeText(getBaseContext(), "Radio off",
+                                                              Toast.LENGTH_SHORT).show()
+        }
+      }
+    }, IntentFilter(SENT))
+    //---when the SMS has been delivered---
+    registerReceiver(object:BroadcastReceiver() {
+      fun onReceive(arg0:Context, arg1:Intent) {
+        when (getResultCode()) {
+          Activity.RESULT_OK -> Toast.makeText(getBaseContext(), "SMS delivered",
+                                               Toast.LENGTH_SHORT).show()
+          Activity.RESULT_CANCELED -> Toast.makeText(getBaseContext(), "SMS not delivered",
+                                                     Toast.LENGTH_SHORT).show()
+        }
+      }
+    }, IntentFilter(DELIVERED))
+    val sms = SmsManager.getDefault()
+    sms.sendTextMessage(phoneNumber, null, message, sentPI, deliveredPI)
+  }
+}
+```
 
 
 ## Pitfalls 
+
+
 
 ## List Of Sources
 
@@ -282,7 +463,6 @@ class Sms:AppCompatActivity() {
  
 * dead end sources
     * https://www.tutorialspoint.com/android/android_broadcast_receivers.htm
-    * 
 
 
 
