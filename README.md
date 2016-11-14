@@ -23,3 +23,46 @@
     </div>
 </pre>
 
+```javascript
+if (isAwesome){
+  return true
+}
+```
+
+
+```java
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package inherit;
+
+/**
+ *
+ * @author Dino
+ */
+public class Inherit {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        
+                car car = new car();
+                System.out.println(car.getname());
+     
+        System.out.println(car.getmærke() + ", " + car.getname());
+        
+    }
+    
+}
+
+// du kan lave en ny bil uden at bruge constructor functionen i javascript
+// men ikke i java
+
+// du behøver ikke bruge constructor i 
+// javascript's klasser som arver en konstructor fra classen den arver fra
+
+```
