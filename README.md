@@ -133,7 +133,8 @@ As Kanye West said:
 
 
 ## Sms Class
-´´´java
+
+```java
 package tutorialspoint.example.com.smsproject;
 
 import android.content.Intent;
@@ -207,4 +208,4 @@ public class Sms extends AppCompatActivity implements Llamaface {
 
 
 }
-´´´ 
+```
