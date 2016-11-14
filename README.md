@@ -8,10 +8,6 @@
 ...snip...    
 <a name="headers"/>
 
-
-
-## Headers
-
 <h2>Example of code</h2>
 
 <pre>
@@ -32,7 +28,7 @@
 
 ## Javascript
 ...snip... 
-<a name=Javascript/>
+<a name="Javascript"/>
 ```javascript
 if (isAwesome){
   return true
