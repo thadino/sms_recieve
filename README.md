@@ -120,3 +120,91 @@ As Kanye West said:
 
 > We're living the future so
 > the present is our past.
+
+
+
+
+
+
+
+
+
+
+
+
+## Sms Class
+´´´java
+package tutorialspoint.example.com.smsproject;
+
+import android.content.Intent;
+import android.provider.Settings;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+
+
+public class Sms extends AppCompatActivity implements Llamaface {
+
+    private static TextView text1;
+    static String Yolo;
+
+
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+
+
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sms);
+//        IncomingSms incSms = new IncomingSms(this);
+
+
+        final TextView textview = (TextView) findViewById(R.id.textView);
+
+        final Button button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                Log.d("yolo", "" + R.id.textView);
+                textview.setText(Yolo);
+            }
+        });
+
+
+    }
+
+    static void settext(String Text) {
+//        Log.d("abekat", Text);
+//        Log.d("yolo", "" + R.id.textView);
+//        final TextView textview = (TextView) findViewById(R.id.textView);
+//        textview.setText("yolo");
+        Yolo = Text;
+        Log.d("yolo", "" + Yolo);
+
+
+
+    }
+
+
+
+    @Override
+    public void textSetter(String msg) {
+        Log.d("jeg er fundet !!! ", "" + R.id.textView);
+        TextView textview = (TextView) findViewById(R.id.textView);
+        textview.setText(msg);
+    }
+    
+
+
+}
+´´´ 
