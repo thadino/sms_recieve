@@ -5,7 +5,7 @@
 [Java](#Java)
 [Javascript](#Javascript)
 ## Headers
-..   
+ 
 <a name="headers"/>
 
 <h2>Example of code</h2>
@@ -25,7 +25,7 @@
         </div>
     </div>
 </pre>
-..
+
 ## Javascript
 <a name="Javascript"/>
 ```javascript
