@@ -20,7 +20,9 @@ Denne feature er meget brugbar og bliver brugt af indtil flere af de mest popul√
 
 
 
-## activity_sms (XML)
+## Example of recieving an sms in an android application
+
+### activity_sms (XML)
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -72,7 +74,7 @@ Denne feature er meget brugbar og bliver brugt af indtil flere af de mest popul√
 </manifest>
 ```
 
-## Incoming Sms Class (Java)
+### Incoming Sms Class (Java)
 ```java
 
 
@@ -127,7 +129,7 @@ public class IncomingSms extends BroadcastReceiver {
 }
 ```
 
-## Incoming Sms Class (Kotlin)
+### Incoming Sms Class (Kotlin)
 ```kotlin
 class IncomingSms:BroadcastReceiver() {
   internal val sms = SmsManager.getDefault()
@@ -162,7 +164,7 @@ class IncomingSms:BroadcastReceiver() {
 ```
 
 
-## Sms Class
+### Sms Class
 
 ```java
 
@@ -229,7 +231,7 @@ public class Sms extends AppCompatActivity  {
 ```
 
 
-## Sms Class (Kotlin)
+### Sms Class (Kotlin)
 ```kotlin
 class Sms:AppCompatActivity() {
   protected fun onCreate(savedInstanceState:Bundle) {
@@ -265,9 +267,22 @@ class Sms:AppCompatActivity() {
 }
 ```
 
+## Example of sending an sms in an android application
 
 
 
+
+## Pitfalls 
+
+## List Of Sources
+
+* good sources
+    * https://www.tutorialspoint.com/android/android_sending_sms.htm
+    * http://androidexample.com/Incomming_SMS_Broadcast_Receiver_-_Android_Example/index.php?view=article_discription&aid=62
+ 
+* dead end sources
+    * https://www.tutorialspoint.com/android/android_broadcast_receivers.htm
+    * 
 
 
 
