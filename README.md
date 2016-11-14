@@ -1,3 +1,237 @@
+
+# Incoming Sms Class
+```kotlin
+package tutorialspoint.example.com.smsproject;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.telephony.SmsManager;
+import android.telephony.SmsMessage;
+import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
+
+
+/**
+ * Created by dino on 02-11-2016.
+ */
+
+
+
+// Get the object of SmsManager
+
+
+    //enten send et nyt intent med extra message (som er smsen), skriv den da normalt ud pﾃ･ den nye side som intentet starter. Ellers skal du have en mﾃ･de at fﾃ･ en reference
+    //til Sms.java klassen herind. altsﾃ･ ikke ne ny, men this
+
+public class IncomingSms extends BroadcastReceiver {
+
+    // Get the object of SmsManager
+//    Llamaface delegate;
+
+    final SmsManager sms = SmsManager.getDefault();
+
+//    public IncomingSms(Llamaface delegate)
+//    {
+//        this.delegate = delegate;
+//    }
+
+
+
+    public void onReceive(Context context, Intent intent) {
+
+        // Retrieves a map of extended data from the intent.
+        final Bundle bundle = intent.getExtras();
+
+        try {
+
+            if (bundle != null) {
+
+                final Object[] pdusObj = (Object[]) bundle.get("pdus");
+
+                for (int i = 0; i < pdusObj.length; i++) {
+
+                    SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
+                    String phoneNumber = currentMessage.getDisplayOriginatingAddress();
+
+                    String senderNum = phoneNumber;
+                    String message = currentMessage.getDisplayMessageBody();
+
+                    Log.i("SmsReceiver", "senderNum: "+ senderNum + "; message: " + message);
+
+
+                    // Show Alert
+                    int duration = Toast.LENGTH_LONG;
+                    Toast toast = Toast.makeText(context,
+                            "senderNum: "+ senderNum + ", message: " + message, duration);
+                    toast.show();
+
+
+//                    Sms sms = new Sms();
+                    String s = "senderNum: " + senderNum + ", message: " + message + ", " + duration;
+                    Sms.settext(s);
+//                    sms.settext(s);
+//                    Log.d(sms.Yolo + "", "onReceive: ");
+//                    TextView textview = (TextView) findViewById(R.id.textView);
+//                    textview.setText(context + ", " + "senderNum: " + senderNum + ", message: " + message + ", " + duration);
+//                    delegate.textSetter(s);
+
+                } // end for loop
+            } // bundle is null
+
+        } catch (Exception e) {
+            Log.e("SmsReceiver", "Exception smsReceiver" +e);
+
+        }
+    }
+
+}
+
+//public class IncomingSms extends BroadcastReceiver {
+//
+//    final SmsManager sms = SmsManager.getDefault();
+//
+//    public void onReceive(Context context, Intent intent)
+//    {
+//
+//        // Retrieves a map of extended data from the intent.
+//        final Bundle bundle = intent.getExtras();
+//
+//        try {
+//
+//            if (bundle != null) {
+//
+//                final Object[] pdusObj = (Object[]) bundle.get("pdus");
+//
+//                for (int i = 0; i < pdusObj.length; i++) {
+//
+//                    SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
+//                    String phoneNumber = currentMessage.getDisplayOriginatingAddress();
+//
+//                    String senderNum = phoneNumber;
+//                    String message = currentMessage.getDisplayMessageBody();
+//
+//                    Log.i("SmsReceiver", "senderNum: "+ senderNum + "; message: " + message);
+//
+//
+//                    // Show alert
+//                    int duration = Toast.LENGTH_LONG;
+//                    Toast toast = Toast.makeText(context, "senderNum: "+ senderNum + ", message: " + message, duration);
+//                    toast.show();
+//
+//                } // end for loop
+//            } // bundle is null
+//
+//        } catch (Exception e) {
+//            Log.e("SmsReceiver", "Exception smsReceiver" +e);
+//
+//        }
+//
+//
+//
+//    }
+//
+//}
+```
+
+
+
+## Sms Class
+
+```kotlin
+package tutorialspoint.example.com.smsproject;
+
+import android.content.Intent;
+import android.provider.Settings;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+
+
+public class Sms extends AppCompatActivity implements Llamaface {
+
+    private static TextView text1;
+    static String Yolo;
+
+
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+
+
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sms);
+//        IncomingSms incSms = new IncomingSms(this);
+
+
+        final TextView textview = (TextView) findViewById(R.id.textView);
+
+        final Button button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                Log.d("yolo", "" + R.id.textView);
+                textview.setText(Yolo);
+            }
+        });
+
+
+    }
+
+    static void settext(String Text) {
+//        Log.d("abekat", Text);
+//        Log.d("yolo", "" + R.id.textView);
+//        final TextView textview = (TextView) findViewById(R.id.textView);
+//        textview.setText("yolo");
+        Yolo = Text;
+        Log.d("yolo", "" + Yolo);
+
+
+
+    }
+
+
+
+    @Override
+    public void textSetter(String msg) {
+        Log.d("jeg er fundet !!! ", "" + R.id.textView);
+        TextView textview = (TextView) findViewById(R.id.textView);
+        textview.setText(msg);
+    }
+    
+
+
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # sms_recieve
 
 ##### Table of Contents  
@@ -132,80 +366,4 @@ As Kanye West said:
 
 
 
-## Sms Class
 
-```java
-package tutorialspoint.example.com.smsproject;
-
-import android.content.Intent;
-import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
-
-
-public class Sms extends AppCompatActivity implements Llamaface {
-
-    private static TextView text1;
-    static String Yolo;
-
-
-
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
-
-
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sms);
-//        IncomingSms incSms = new IncomingSms(this);
-
-
-        final TextView textview = (TextView) findViewById(R.id.textView);
-
-        final Button button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                Log.d("yolo", "" + R.id.textView);
-                textview.setText(Yolo);
-            }
-        });
-
-
-    }
-
-    static void settext(String Text) {
-//        Log.d("abekat", Text);
-//        Log.d("yolo", "" + R.id.textView);
-//        final TextView textview = (TextView) findViewById(R.id.textView);
-//        textview.setText("yolo");
-        Yolo = Text;
-        Log.d("yolo", "" + Yolo);
-
-
-
-    }
-
-
-
-    @Override
-    public void textSetter(String msg) {
-        Log.d("jeg er fundet !!! ", "" + R.id.textView);
-        TextView textview = (TextView) findViewById(R.id.textView);
-        textview.setText(msg);
-    }
-    
-
-
-}
-```
