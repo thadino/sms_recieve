@@ -1,62 +1,79 @@
-# activity_sms (XML)
+# SMS
+
+
+How to send and receive sms on android.
+
+## Authors
+Group G7
+* Sebastian Ryberg
+* Steffen Lefort
+
+
+## The feature
+Denne feature sørger for at applikationer kan sende og/eller modtage sms'er.
+
+*  Krav
+    *  Du skal kunne modtage & sende sms på mobilen.
+    *  Hvis du vil teste på emulator skal android SDK være nr. 22 eller under, da 23 og op kræver tilladelse fra brugeren til adgang.
+    
+Denne feature er meget brugbar og bliver brugt af indtil flere af de mest populære firmaer. Det bliver blandt andet brugt til security (tænk handel på nettet gennem NETS hvor du får en midlertidig gokendelses kode) - altså verifikation af brugeren gennem mere end 1 medie. 
+
+
+
+## activity_sms (XML)
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_sms"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="tutorialspoint.example.com.smsproject.Sms">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="tutorialspoint.example.com.smsproject">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true" />
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Sms">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-    <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="34dp"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="49dp"
-        android:id="@+id/button" />
-</RelativeLayout>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+        <receiver android:name="IncomingCall"> // 
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+        </receiver>
+
+
+        <receiver android:name="MyReceiver" >
+            <intent-filter>
+                <action android:name="ax.androidexample.mybroadcast" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".IncomingSms"> 
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS"></uses-permission>
+
+</manifest>
 ```
 
-# Incoming Sms Class
-```kotlin
-package tutorialspoint.example.com.smsproject;
-
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.telephony.SmsManager;
-import android.telephony.SmsMessage;
-import android.util.Log;
-import android.widget.TextView;
-import android.widget.Toast;
-
-
-/**
- * Created by dino on 02-11-2016.
- */
-
-
-
-
-
-
+## Incoming Sms Class (Java)
+```java
 
 
 public class IncomingSms extends BroadcastReceiver {
@@ -110,23 +127,44 @@ public class IncomingSms extends BroadcastReceiver {
 }
 ```
 
+## Incoming Sms Class (Kotlin)
+```kotlin
+class IncomingSms:BroadcastReceiver() {
+  internal val sms = SmsManager.getDefault()
+  fun onReceive(context:Context, intent:Intent) {
+    // Retrieves a map of extended data from the intent.
+    val bundle = intent.getExtras()
+    try
+    {
+      if (bundle != null)
+      {
+        val pdusObj = bundle.get("pdus") as Array<Any>
+        for (i in pdusObj.indices)
+        {
+          val currentMessage = SmsMessage.createFromPdu(pdusObj[i] as ByteArray)
+          val phoneNumber = currentMessage.getDisplayOriginatingAddress()
+          val senderNum = phoneNumber
+          val message = currentMessage.getDisplayMessageBody()
+          Log.i("SmsReceiver", "senderNum: " + senderNum + "; message: " + message)
+          // Show Alert
+          val duration = Toast.LENGTH_LONG
+          val toast = Toast.makeText(context,
+                                     "senderNum: " + senderNum + ", message: " + message, duration)
+          toast.show()
+        } // end for loop
+      } // bundle is null
+    }
+    catch (e:Exception) {
+      Log.e("SmsReceiver", "Exception smsReceiver" + e)
+    }
+  }
+}
+```
 
 
 ## Sms Class
 
-```kotlin
-package tutorialspoint.example.com.smsproject;
-
-import android.content.Intent;
-import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
+```java
 
 
 
@@ -191,6 +229,7 @@ public class Sms extends AppCompatActivity  {
 ```
 
 
+## Sms Class (Kotlin)
 
 
 
