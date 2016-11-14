@@ -1,9 +1,11 @@
 # sms_recieve
 
-.markdown-here-wrapper {
-  font-family: Verdana, sans;
-  background-color #ffffff;
-}
+##### Table of Contents  
+[Headers](#headers)  
+[Emphasis](#emphasis)  
+...snip...    
+<a name="headers"/>
+## Headers
 
 <h2>Example of code</h2>
 
