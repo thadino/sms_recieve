@@ -1,6 +1,9 @@
 # sms_recieve
 
-
+.markdown-here-wrapper {
+  font-family: Verdana, sans;
+  background-color #ffffff;
+}
 
 <h2>Example of code</h2>
 
@@ -20,10 +23,3 @@
     </div>
 </pre>
 
-```javascript
-function fancyAlert(arg) {
-  if(arg) {
-    $.facebox({div:'#foo'})
-  }
-}
-```
