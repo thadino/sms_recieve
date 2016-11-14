@@ -103,14 +103,6 @@ public class IncomingSms extends BroadcastReceiver {
                     toast.show();
 
 
-//                    Sms sms = new Sms();
-                    String s = "senderNum: " + senderNum + ", message: " + message + ", " + duration;
-                    Sms.settext(s);
-//                    sms.settext(s);
-//                    Log.d(sms.Yolo + "", "onReceive: ");
-//                    TextView textview = (TextView) findViewById(R.id.textView);
-//                    textview.setText(context + ", " + "senderNum: " + senderNum + ", message: " + message + ", " + duration);
-//                    delegate.textSetter(s);
 
                 } // end for loop
             } // bundle is null
