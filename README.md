@@ -7,9 +7,12 @@
 [Javascript](#Javascript)
 ## Headers
 ...snip...    
-<a name="Java"/>
-<a name=Javascript/>
 <a name="headers"/>
+## Java
+<a name="Java"/>
+## Javascript
+<a name=Javascript/>
+
 ## Headers
 
 <h2>Example of code</h2>
