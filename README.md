@@ -54,23 +54,17 @@ import android.widget.Toast;
 
 
 
-// Get the object of SmsManager
 
 
-    //enten send et nyt intent med extra message (som er smsen), skriv den da normalt ud pﾃ･ den nye side som intentet starter. Ellers skal du have en mﾃ･de at fﾃ･ en reference
-    //til Sms.java klassen herind. altsﾃ･ ikke ne ny, men this
+
+
 
 public class IncomingSms extends BroadcastReceiver {
 
-    // Get the object of SmsManager
-//    Llamaface delegate;
+
 
     final SmsManager sms = SmsManager.getDefault();
 
-//    public IncomingSms(Llamaface delegate)
-//    {
-//        this.delegate = delegate;
-//    }
 
 
 
