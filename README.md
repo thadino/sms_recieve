@@ -68,6 +68,30 @@ class IncomingSms:BroadcastReceiver() {
 ```
 
 
+### Incoming Sms (Sms Class)
+
+```kotlin
+fun Context.toast(message: String)
+{
+  Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+}
+class Sms : AppCompatActivity()  {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_sms)
+        if (intent.extras != null) {
+            val value = intent.extras.getString("Message")
+            //The key argument here must match that used in the other activity
+//            toast(value)
+            if(value != null) {
+                val newline = System.getProperty("line.separator")
+                textView.text = textView.getText().toString() + newline + newline    +  value
+            }
+        }
+}
+}
+```
+
 
 ### Send Sms Class
 ```kotlin
